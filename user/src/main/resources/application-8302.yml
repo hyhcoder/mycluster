@@ -1,0 +1,22 @@
+server:
+  port: 8302
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8100/eureka/
+  instance:
+    instance-id: user-2   # 此实例注册到eureka服务端唯一的实例ID
+    prefer-ip-address: true # 是否显示IP地址
+    lease-renewal-interval-in-seconds: 10 # eureka客户需要多长时间发送心跳(默认30s)
+    lease-expiration-duration-in-seconds: 30 # eureka服务器在该客户端没心跳多久删除客户端(默认90s)
+# 日志配置
+logging:
+  file: ./user/log/service.log
+  level:
+    org.springframework.boot.autoconfigure: ERROR
+
+spring:
+  application:
+    name: user
+app:
+  name: user-2

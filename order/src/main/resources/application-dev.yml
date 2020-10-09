@@ -1,0 +1,40 @@
+server:
+  port: 8200
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8100/eureka/
+  instance:
+    instance-id: order-1   # 此实例注册到eureka服务端唯一的实例ID
+    prefer-ip-address: true # 是否显示IP地址
+    lease-renewal-interval-in-seconds: 10 # eureka客户需要多长时间发送心跳(默认30s)
+    lease-expiration-duration-in-seconds: 30 # eureka服务器在该客户端没心跳多久删除客户端(默认90s)
+
+# ribbon超时设置, 和hystrix结合时, 要注意hystrix的超时时间, hystrix在外层,不能小于ribbon超时时间
+# 有了ribbon超时设置, 一般关闭feign的超时设置(默认关闭), 否则会冲突
+ribbon:
+  # 是否对所有操作都进行重试, 这个东西默认是false, 建议也是设置false
+  # true的情况下, get之外的其他请求, post等, 都会因为超时而重新发起请求, 可能导致重复更新等, 需要做好幂等性
+  # false默认情况下, 只会在get的情况下重试
+  OkToRetryOnAllOperations: false
+  ReadTimeout: 2000 # 毫秒 逻辑处理超时时间, 可以根据业务情况设置大一点
+  ConnectTimeout: 2000 # 毫秒 连接超时时间
+  MaxAutoRetries: 2 # 对当前实例的最大重试次数, 不包含首次
+  MaxAutoRetriesNextServer: 1 # 下一个实例的最大重试次数, 不包括第一个实例
+
+
+# 日志配置
+logging:
+  file: ./order/log/service.log
+  level:
+    org.springframework.boot.autoconfigure: ERROR
+
+spring:
+  application:
+    name: order
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true # 重试开关, 默认为true
+app:
+  name: order-1

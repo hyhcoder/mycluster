@@ -1,0 +1,23 @@
+server:
+  port: 8102
+eureka:
+  server:
+    # 本地关闭自我保护
+    enable-self-preservation: false
+  instance:
+    hostname: 127.0.0.1
+
+  client:
+    # 不用检索服务
+    fetch-registry: false
+    # 不向注册中心注册自己
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8100/eureka/,http://127.0.0.1:8103/eureka/
+# 日志配置
+logging:
+  file: ./eureka/log/service.log
+  level:
+    org.springframework.boot.autoconfigure: ERROR
+
+

@@ -1,0 +1,7 @@
+server:
+  port: 8400
+# 日志配置
+logging:
+  file: ./nacos/log/service.log
+  level:
+    org.springframework.boot.autoconfigure: ERROR

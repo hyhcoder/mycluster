@@ -1,0 +1,55 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hyhcoder</groupId>
+    <artifactId>mycluster</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>mycluster</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <jackson-version>2.9.6</jackson-version>
+        <spring-boot-version>2.1.3.RELEASE</spring-boot-version>
+        <spring-cloud.version>Greenwich.SR6</spring-cloud.version>
+        <quickframe-common.version>1.0.0-SNAPSHOT</quickframe-common.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <modules>
+        <module>eureka</module>
+        <module>nacos</module>
+        <module>order</module>
+        <module>user</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- spring cloud 版本 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 一些公用对象及工具等 -->
+            <dependency>
+                <groupId>com.hyhcoder</groupId>
+                <artifactId>quickframe-common</artifactId>
+                <version>${quickframe-common.version}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+</project>
